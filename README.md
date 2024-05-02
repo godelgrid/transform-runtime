@@ -1,6 +1,8 @@
 # transform-runtime
 Transform runtime side car that provides data transformation capabilities
 
+Python Version: 3.10
+
 Use below command to generate grpc code from proto files:
 
 ```
