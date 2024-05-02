@@ -1,0 +1,4 @@
+grpcio==1.63.0
+grpcio-tools==1.63.0
+pip-autoremove==0.10.0
+protobuf==5.26.1
