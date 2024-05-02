@@ -85,5 +85,5 @@ class ControlService(control_pb2_grpc.Control):
                       metadata=None):
         process_id = os.getpid()
         response = control_pb2.ServerDetailsResponse()
-        response.serverPid = process_id
+        response.serverPid = str(process_id)
         return response
