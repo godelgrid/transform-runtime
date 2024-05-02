@@ -1,3 +1,5 @@
+import os
+
 from protocol.transform.v1 import control_pb2, control_pb2_grpc
 from services.transformer_factory import TRANSFORM_FACTORY
 
@@ -68,4 +70,20 @@ class ControlService(control_pb2_grpc.Control):
         success, error = TRANSFORM_FACTORY.verify_inline_module(script)
         response.success = success
         response.error = error
+        return response
+
+    @staticmethod
+    def ServerDetails(request,
+                      target,
+                      options=(),
+                      channel_credentials=None,
+                      call_credentials=None,
+                      insecure=False,
+                      compression=None,
+                      wait_for_ready=None,
+                      timeout=None,
+                      metadata=None):
+        process_id = os.getpid()
+        response = control_pb2.ServerDetailsResponse()
+        response.serverPid = process_id
         return response

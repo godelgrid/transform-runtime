@@ -39,6 +39,11 @@ class ControlStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.ServerDetails = channel.unary_unary(
+                '/transform.v1.control.Control/ServerDetails',
+                request_serializer=transform_dot_v1_dot_control__pb2.ServerDetailsRequest.SerializeToString,
+                response_deserializer=transform_dot_v1_dot_control__pb2.ServerDetailsResponse.FromString,
+                _registered_method=True)
         self.HealthCheck = channel.stream_unary(
                 '/transform.v1.control.Control/HealthCheck',
                 request_serializer=transform_dot_v1_dot_control__pb2.HeartbeatRequest.SerializeToString,
@@ -58,6 +63,12 @@ class ControlStub(object):
 
 class ControlServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def ServerDetails(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def HealthCheck(self, request_iterator, context):
         """Missing associated documentation comment in .proto file."""
@@ -80,6 +91,11 @@ class ControlServicer(object):
 
 def add_ControlServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'ServerDetails': grpc.unary_unary_rpc_method_handler(
+                    servicer.ServerDetails,
+                    request_deserializer=transform_dot_v1_dot_control__pb2.ServerDetailsRequest.FromString,
+                    response_serializer=transform_dot_v1_dot_control__pb2.ServerDetailsResponse.SerializeToString,
+            ),
             'HealthCheck': grpc.stream_unary_rpc_method_handler(
                     servicer.HealthCheck,
                     request_deserializer=transform_dot_v1_dot_control__pb2.HeartbeatRequest.FromString,
@@ -104,6 +120,33 @@ def add_ControlServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class Control(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def ServerDetails(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/transform.v1.control.Control/ServerDetails',
+            transform_dot_v1_dot_control__pb2.ServerDetailsRequest.SerializeToString,
+            transform_dot_v1_dot_control__pb2.ServerDetailsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def HealthCheck(request_iterator,

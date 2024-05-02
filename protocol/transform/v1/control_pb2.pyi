@@ -4,6 +4,16 @@ from typing import ClassVar as _ClassVar, Optional as _Optional
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class ServerDetailsRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class ServerDetailsResponse(_message.Message):
+    __slots__ = ("serverPid",)
+    SERVERPID_FIELD_NUMBER: _ClassVar[int]
+    serverPid: str
+    def __init__(self, serverPid: _Optional[str] = ...) -> None: ...
+
 class HeartbeatRequest(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...

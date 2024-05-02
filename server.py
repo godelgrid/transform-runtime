@@ -1,4 +1,5 @@
 import os
+import sys
 from concurrent import futures
 
 import grpc
@@ -8,16 +9,13 @@ from services.control_service import ControlService
 from services.transform_service import TransformService
 
 
-def serve():
+def serve(socket_path: str):
     # Create a gRPC server
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 
     # Add services to server
     control_pb2_grpc.add_ControlServicer_to_server(ControlService(), server)
     transform_pb2_grpc.add_TransformServicer_to_server(TransformService(), server)
-
-    # Define the Unix domain socket path
-    socket_path = "/tmp/gridTransform.sock"
 
     # Remove the socket file if it already exists
     if os.path.exists(socket_path):
@@ -38,4 +36,8 @@ def serve():
 
 
 if __name__ == "__main__":
-    serve()
+    server_args = sys.argv
+    if len(server_args) < 2:
+        print('Usage: server.py <socket_path>')
+        exit(1)
+    serve(server_args[1])

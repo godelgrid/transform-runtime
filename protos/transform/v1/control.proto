@@ -2,6 +2,13 @@ syntax = "proto3";
 
 package transform.v1.control;
 
+message ServerDetailsRequest {
+}
+
+message ServerDetailsResponse {
+  string serverPid = 1;
+}
+
 message HeartbeatRequest {
 }
 
@@ -29,6 +36,8 @@ message VerifyInlineModuleResponse {
 }
 
 service Control {
+  rpc ServerDetails(ServerDetailsRequest) returns (ServerDetailsResponse);
+
   rpc HealthCheck(stream HeartbeatRequest) returns (HeartbeatResponse);
 
   rpc LoadInlineModule(LoadInlineModuleRequest) returns (LoadInlineModuleResponse);
