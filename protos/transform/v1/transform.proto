@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package transform.v1.transform;
+
+message TransformRequest {
+  string transformer_id = 1;
+  repeated string data = 2;
+}
+
+message TransformResponse {
+  repeated string data = 2;
+}
+
+service Transform {
+  rpc TransformData(TransformRequest) returns (TransformResponse);
+}
