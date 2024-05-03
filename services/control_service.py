@@ -1,6 +1,7 @@
 import os
 
 from protocol.transform.v1 import control_pb2, control_pb2_grpc
+from services.process_monitor_service import PROCESS_MONITOR_SERVICE
 from services.transformer_factory import TRANSFORM_FACTORY
 
 
@@ -45,6 +46,7 @@ class ControlService(control_pb2_grpc.Control):
                     wait_for_ready=None,
                     timeout=None,
                     metadata=None):
+        PROCESS_MONITOR_SERVICE.update_health_check()
         response = control_pb2.HeartbeatResponse()
         response.healthy = True
         return response

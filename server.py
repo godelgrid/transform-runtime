@@ -9,6 +9,7 @@ import watchtower
 
 from protocol.transform.v1 import control_pb2_grpc, transform_pb2_grpc
 from services.control_service import ControlService
+from services.process_monitor_service import PROCESS_MONITOR_SERVICE
 from services.transform_service import TransformService
 
 logger = logging.getLogger(__name__)
@@ -61,8 +62,10 @@ if __name__ == "__main__":
 
 
     def shutdown_runtime():
-        root_logger.info("*** Transform runtime shutdown. Flushing logger ***")
+        root_logger.info("*** Transform runtime shutdown ***")
+        PROCESS_MONITOR_SERVICE.shutdown()
         handler.flush()
+        PROCESS_MONITOR_SERVICE.await_shutdown(timeout=10)
 
 
     serve(socket_path, shutdown_runtime)
