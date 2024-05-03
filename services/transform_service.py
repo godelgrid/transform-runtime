@@ -44,6 +44,7 @@ class TransformService(transform_pb2_grpc.Transform):
             try:
                 json_data = json.dumps(parsed_data)
                 transformed_data.append(json_data)
+                del parsed_data
             except Exception as e:
                 print(str(e))
                 transformed_data.append(data)
