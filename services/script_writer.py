@@ -8,6 +8,6 @@ def transform(self, data):
 
 
 def compile_script(script: str) -> CodeType:
-    script_id: str = str(uuid.UUID()).replace("-", "")
+    script_id: str = str(uuid.uuid4()).replace("-", "")
     transformer_script = INLINE_TRANSFORMER.replace("__SCRIPT__", script)
     return compile(transformer_script, f"script{script_id}", 'exec')

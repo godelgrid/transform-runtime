@@ -31,7 +31,7 @@ class ControlService(control_pb2_grpc.Control):
             return response
         else:
             response.success = False
-            response.error = error
+            response.error = error if error else 'Unknown Error occurred while loading inline module'
             return response
 
     @staticmethod
@@ -68,8 +68,9 @@ class ControlService(control_pb2_grpc.Control):
             return response
 
         success, error = TRANSFORM_FACTORY.verify_inline_module(script)
-        response.success = success
-        response.error = error
+        response.success = True if success else False
+        if error:
+            response.error = error
         return response
 
     @staticmethod
