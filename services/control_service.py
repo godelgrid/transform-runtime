@@ -46,10 +46,11 @@ class ControlService(control_pb2_grpc.Control):
                     wait_for_ready=None,
                     timeout=None,
                     metadata=None):
-        PROCESS_MONITOR_SERVICE.update_health_check()
-        response = control_pb2.HeartbeatResponse()
-        response.healthy = True
-        return response
+        for request in request_iterator:
+            PROCESS_MONITOR_SERVICE.update_health_check()
+            response = control_pb2.HeartbeatResponse()
+            response.healthy = True
+            yield response
 
     @staticmethod
     def VerifyInlineModule(request,

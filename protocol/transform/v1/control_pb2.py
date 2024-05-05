@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1atransform/v1/control.proto\x12\x14transform.v1.control\"\x16\n\x14ServerDetailsRequest\"*\n\x15ServerDetailsResponse\x12\x11\n\tserverPid\x18\x01 \x01(\t\"\x12\n\x10HeartbeatRequest\"$\n\x11HeartbeatResponse\x12\x0f\n\x07healthy\x18\x01 \x01(\x08\"A\n\x17LoadInlineModuleRequest\x12\x16\n\x0etransformer_id\x18\x01 \x01(\t\x12\x0e\n\x06script\x18\x02 \x01(\t\":\n\x18LoadInlineModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"+\n\x19VerifyInlineModuleRequest\x12\x0e\n\x06script\x18\x01 \x01(\t\"<\n\x1aVerifyInlineModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t2\xc1\x03\n\x07\x43ontrol\x12h\n\rServerDetails\x12*.transform.v1.control.ServerDetailsRequest\x1a+.transform.v1.control.ServerDetailsResponse\x12`\n\x0bHealthCheck\x12&.transform.v1.control.HeartbeatRequest\x1a\'.transform.v1.control.HeartbeatResponse(\x01\x12q\n\x10LoadInlineModule\x12-.transform.v1.control.LoadInlineModuleRequest\x1a..transform.v1.control.LoadInlineModuleResponse\x12w\n\x12VerifyInlineModule\x12/.transform.v1.control.VerifyInlineModuleRequest\x1a\x30.transform.v1.control.VerifyInlineModuleResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1atransform/v1/control.proto\x12\x14transform.v1.control\"\x16\n\x14ServerDetailsRequest\"*\n\x15ServerDetailsResponse\x12\x11\n\tserverPid\x18\x01 \x01(\t\"\x12\n\x10HeartbeatRequest\"$\n\x11HeartbeatResponse\x12\x0f\n\x07healthy\x18\x01 \x01(\x08\"A\n\x17LoadInlineModuleRequest\x12\x16\n\x0etransformer_id\x18\x01 \x01(\t\x12\x0e\n\x06script\x18\x02 \x01(\t\":\n\x18LoadInlineModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"+\n\x19VerifyInlineModuleRequest\x12\x0e\n\x06script\x18\x01 \x01(\t\"<\n\x1aVerifyInlineModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t2\xc3\x03\n\x07\x43ontrol\x12h\n\rServerDetails\x12*.transform.v1.control.ServerDetailsRequest\x1a+.transform.v1.control.ServerDetailsResponse\x12\x62\n\x0bHealthCheck\x12&.transform.v1.control.HeartbeatRequest\x1a\'.transform.v1.control.HeartbeatResponse(\x01\x30\x01\x12q\n\x10LoadInlineModule\x12-.transform.v1.control.LoadInlineModuleRequest\x1a..transform.v1.control.LoadInlineModuleResponse\x12w\n\x12VerifyInlineModule\x12/.transform.v1.control.VerifyInlineModuleRequest\x1a\x30.transform.v1.control.VerifyInlineModuleResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -38,5 +38,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_VERIFYINLINEMODULERESPONSE']._serialized_start=350
   _globals['_VERIFYINLINEMODULERESPONSE']._serialized_end=410
   _globals['_CONTROL']._serialized_start=413
-  _globals['_CONTROL']._serialized_end=862
+  _globals['_CONTROL']._serialized_end=864
 # @@protoc_insertion_point(module_scope)

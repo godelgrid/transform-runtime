@@ -38,7 +38,7 @@ message VerifyInlineModuleResponse {
 service Control {
   rpc ServerDetails(ServerDetailsRequest) returns (ServerDetailsResponse);
 
-  rpc HealthCheck(stream HeartbeatRequest) returns (HeartbeatResponse);
+  rpc HealthCheck(stream HeartbeatRequest) returns (stream HeartbeatResponse);
 
   rpc LoadInlineModule(LoadInlineModuleRequest) returns (LoadInlineModuleResponse);
 

@@ -44,7 +44,7 @@ class ControlStub(object):
                 request_serializer=transform_dot_v1_dot_control__pb2.ServerDetailsRequest.SerializeToString,
                 response_deserializer=transform_dot_v1_dot_control__pb2.ServerDetailsResponse.FromString,
                 _registered_method=True)
-        self.HealthCheck = channel.stream_unary(
+        self.HealthCheck = channel.stream_stream(
                 '/transform.v1.control.Control/HealthCheck',
                 request_serializer=transform_dot_v1_dot_control__pb2.HeartbeatRequest.SerializeToString,
                 response_deserializer=transform_dot_v1_dot_control__pb2.HeartbeatResponse.FromString,
@@ -96,7 +96,7 @@ def add_ControlServicer_to_server(servicer, server):
                     request_deserializer=transform_dot_v1_dot_control__pb2.ServerDetailsRequest.FromString,
                     response_serializer=transform_dot_v1_dot_control__pb2.ServerDetailsResponse.SerializeToString,
             ),
-            'HealthCheck': grpc.stream_unary_rpc_method_handler(
+            'HealthCheck': grpc.stream_stream_rpc_method_handler(
                     servicer.HealthCheck,
                     request_deserializer=transform_dot_v1_dot_control__pb2.HeartbeatRequest.FromString,
                     response_serializer=transform_dot_v1_dot_control__pb2.HeartbeatResponse.SerializeToString,
@@ -159,7 +159,7 @@ class Control(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(
+        return grpc.experimental.stream_stream(
             request_iterator,
             target,
             '/transform.v1.control.Control/HealthCheck',
