@@ -20,15 +20,15 @@ class TransformService(transform_pb2_grpc.Transform):
         response = transform_pb2.TransformResponse()
         transformer_id = request.transformer_id
         if not transformer_id:
-            response.data = request.data
+            response.data.extend(request.data)
             return response
         transformer = TRANSFORM_FACTORY.get_transformer(transformer_id)
         if not transformer:
-            response.data = request.data
+            response.data.extend(request.data)
             return response
         data_list = request.data
         if not data_list:
-            response.data = []
+            response.data.extend([])
             return response
 
         transformed_data = []
@@ -50,5 +50,5 @@ class TransformService(transform_pb2_grpc.Transform):
                 transformed_data.append(data)
                 continue
 
-        response.data = transformed_data
+        response.data.extend(transformed_data)
         return response
