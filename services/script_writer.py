@@ -1,8 +1,10 @@
 import uuid
 from types import CodeType
 
-INLINE_TRANSFORMER = """def transform(self, data):
+INLINE_TRANSFORMER = """def transform(data):
 __SCRIPT__
+
+transform(data)
 """
 
 
