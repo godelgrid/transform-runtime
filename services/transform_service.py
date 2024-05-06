@@ -24,6 +24,7 @@ class TransformService(transform_pb2_grpc.Transform):
             return response
         transformer = TRANSFORM_FACTORY.get_transformer(transformer_id)
         if not transformer:
+            response.transformer_missing = True
             response.data.extend(request.data)
             return response
         data_list = request.data

@@ -8,6 +8,7 @@ message TransformRequest {
 }
 
 message TransformResponse {
+  bool transformer_missing = 1;
   repeated string data = 2;
 }
 

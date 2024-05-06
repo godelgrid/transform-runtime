@@ -14,7 +14,9 @@ class TransformRequest(_message.Message):
     def __init__(self, transformer_id: _Optional[str] = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class TransformResponse(_message.Message):
-    __slots__ = ("data",)
+    __slots__ = ("transformer_missing", "data")
+    TRANSFORMER_MISSING_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
+    transformer_missing: bool
     data: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, data: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, transformer_missing: bool = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...
