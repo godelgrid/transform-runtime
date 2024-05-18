@@ -1,6 +1,6 @@
 import os
 from types import CodeType
-from typing import Optional
+from typing import List, Optional, Tuple
 
 from objects.repo_data import RepositoryData
 from objects.transformation_executable import EXECUTABLE_TYPE_CALLABLE, EXECUTABLE_TYPE_INLINE, TransformationExecutable
@@ -102,9 +102,14 @@ class TransformationFactory:
         self._transformation_map[transformation_id] = (transformation, EXECUTABLE_TYPE_CALLABLE,)
         return True, None
 
-    def get_transformation(self, transformation_id) -> Optional[TransformationExecutable]:
-        if transformation_id not in self._transformation_map:
-            return None
+    def get_transformations(self, transformation_ids: List[str]) -> Tuple[List[TransformationExecutable], List[str]]:
+        transformations = []
+        missing_ids = []
+        for transformation_id in transformation_ids:
+            if transformation_id not in self._transformation_map:
+                missing_ids.append(transformation_id)
+            else:
+                transformation, exec_type = self._transformation_map.get(transformation_id)
+                transformations.append(TransformationExecutable(transformation_id, transformation, exec_type))
 
-        transformation, exec_type = self._transformation_map.get(transformation_id)
-        return TransformationExecutable(transformation, exec_type)
+        return transformations, missing_ids

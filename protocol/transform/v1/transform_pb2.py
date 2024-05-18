@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1ctransform/v1/transform.proto\x12\x16transform.v1.transform\":\n\x10TransformRequest\x12\x18\n\x10transformationId\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\t\"@\n\x11TransformResponse\x12\x1d\n\x15transformationMissing\x18\x01 \x01(\x08\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\t2q\n\tTransform\x12\x64\n\rTransformData\x12(.transform.v1.transform.TransformRequest\x1a).transform.v1.transform.TransformResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1ctransform/v1/transform.proto\x12\x16transform.v1.transform\";\n\x10TransformRequest\x12\x19\n\x11transformationIds\x18\x01 \x03(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x03(\t\"`\n\x11TransformResponse\x12\x1d\n\x15transformationMissing\x18\x01 \x01(\x08\x12\x1e\n\x16missingTransformations\x18\x02 \x03(\t\x12\x0c\n\x04\x64\x61ta\x18\x03 \x03(\t2q\n\tTransform\x12\x64\n\rTransformData\x12(.transform.v1.transform.TransformRequest\x1a).transform.v1.transform.TransformResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,9 +22,9 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'transform.v1.transform_pb2'
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_TRANSFORMREQUEST']._serialized_start=56
-  _globals['_TRANSFORMREQUEST']._serialized_end=114
-  _globals['_TRANSFORMRESPONSE']._serialized_start=116
-  _globals['_TRANSFORMRESPONSE']._serialized_end=180
-  _globals['_TRANSFORM']._serialized_start=182
-  _globals['_TRANSFORM']._serialized_end=295
+  _globals['_TRANSFORMREQUEST']._serialized_end=115
+  _globals['_TRANSFORMRESPONSE']._serialized_start=117
+  _globals['_TRANSFORMRESPONSE']._serialized_end=213
+  _globals['_TRANSFORM']._serialized_start=215
+  _globals['_TRANSFORM']._serialized_end=328
 # @@protoc_insertion_point(module_scope)

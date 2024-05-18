@@ -6,17 +6,19 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class TransformRequest(_message.Message):
-    __slots__ = ("transformationId", "data")
-    TRANSFORMATIONID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("transformationIds", "data")
+    TRANSFORMATIONIDS_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
-    transformationId: str
+    transformationIds: _containers.RepeatedScalarFieldContainer[str]
     data: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, transformationId: _Optional[str] = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, transformationIds: _Optional[_Iterable[str]] = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class TransformResponse(_message.Message):
-    __slots__ = ("transformationMissing", "data")
+    __slots__ = ("transformationMissing", "missingTransformations", "data")
     TRANSFORMATIONMISSING_FIELD_NUMBER: _ClassVar[int]
+    MISSINGTRANSFORMATIONS_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
     transformationMissing: bool
+    missingTransformations: _containers.RepeatedScalarFieldContainer[str]
     data: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, transformationMissing: bool = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, transformationMissing: bool = ..., missingTransformations: _Optional[_Iterable[str]] = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...

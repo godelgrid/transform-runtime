@@ -3,13 +3,14 @@ syntax = "proto3";
 package transform.v1.transform;
 
 message TransformRequest {
-  string transformationId = 1;
+  repeated string transformationIds = 1;
   repeated string data = 2;
 }
 
 message TransformResponse {
   bool transformationMissing = 1;
-  repeated string data = 2;
+  repeated string missingTransformations = 2;
+  repeated string data = 3;
 }
 
 service Transform {
