@@ -6,17 +6,17 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class TransformRequest(_message.Message):
-    __slots__ = ("transformer_id", "data")
-    TRANSFORMER_ID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("transformationId", "data")
+    TRANSFORMATIONID_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
-    transformer_id: str
+    transformationId: str
     data: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, transformer_id: _Optional[str] = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, transformationId: _Optional[str] = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class TransformResponse(_message.Message):
-    __slots__ = ("transformer_missing", "data")
-    TRANSFORMER_MISSING_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("transformationMissing", "data")
+    TRANSFORMATIONMISSING_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
-    transformer_missing: bool
+    transformationMissing: bool
     data: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, transformer_missing: bool = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, transformationMissing: bool = ..., data: _Optional[_Iterable[str]] = ...) -> None: ...

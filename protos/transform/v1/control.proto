@@ -17,7 +17,7 @@ message HeartbeatResponse {
 }
 
 message LoadInlineModuleRequest {
-  string transformer_id = 1;
+  string transformationId = 1;
   string script = 2;
 }
 
@@ -35,6 +35,45 @@ message VerifyInlineModuleResponse {
   string error = 2;
 }
 
+enum ExternalRepoType {
+  UNKNOWN_REPO = 0;
+  GITHUB = 1;
+  GITLAB = 2;
+  BIT_BUCKET = 3;
+}
+
+message VerifyExternalModuleRequest {
+  string transformationId = 1;
+  ExternalRepoType repoType = 2;
+  string repoPath = 3;
+  string repoRef = 4;
+  string accessToken = 5;
+  string modulePath = 6;
+  string requirementsPath = 7;
+  string transformationName = 8;
+}
+
+message VerifyExternalModuleResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message LoadExternalModuleRequest {
+  string transformationId = 1;
+  ExternalRepoType repoType = 2;
+  string repoPath = 3;
+  string repoRef = 4;
+  string accessToken = 5;
+  string modulePath = 6;
+  string requirementsPath = 7;
+  string transformationName = 8;
+}
+
+message LoadExternalModuleResponse {
+  bool success = 1;
+  string error = 2;
+}
+
 service Control {
   rpc ServerDetails(ServerDetailsRequest) returns (ServerDetailsResponse);
 
@@ -43,4 +82,8 @@ service Control {
   rpc LoadInlineModule(LoadInlineModuleRequest) returns (LoadInlineModuleResponse);
 
   rpc VerifyInlineModule(VerifyInlineModuleRequest) returns (VerifyInlineModuleResponse);
+
+  rpc VerifyExternalModule(VerifyExternalModuleRequest) returns (VerifyExternalModuleResponse);
+
+  rpc LoadExternalModule(LoadExternalModuleRequest) returns (LoadExternalModuleResponse);
 }

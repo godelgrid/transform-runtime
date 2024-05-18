@@ -41,6 +41,3 @@ class ProcessMonitorService:
                 self._shutdown_hook.shutdown()
                 break
             time.sleep(5)
-
-
-PROCESS_MONITOR_SERVICE = ProcessMonitorService()

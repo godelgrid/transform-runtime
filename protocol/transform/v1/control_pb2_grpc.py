@@ -59,6 +59,16 @@ class ControlStub(object):
                 request_serializer=transform_dot_v1_dot_control__pb2.VerifyInlineModuleRequest.SerializeToString,
                 response_deserializer=transform_dot_v1_dot_control__pb2.VerifyInlineModuleResponse.FromString,
                 _registered_method=True)
+        self.VerifyExternalModule = channel.unary_unary(
+                '/transform.v1.control.Control/VerifyExternalModule',
+                request_serializer=transform_dot_v1_dot_control__pb2.VerifyExternalModuleRequest.SerializeToString,
+                response_deserializer=transform_dot_v1_dot_control__pb2.VerifyExternalModuleResponse.FromString,
+                _registered_method=True)
+        self.LoadExternalModule = channel.unary_unary(
+                '/transform.v1.control.Control/LoadExternalModule',
+                request_serializer=transform_dot_v1_dot_control__pb2.LoadExternalModuleRequest.SerializeToString,
+                response_deserializer=transform_dot_v1_dot_control__pb2.LoadExternalModuleResponse.FromString,
+                _registered_method=True)
 
 
 class ControlServicer(object):
@@ -88,6 +98,18 @@ class ControlServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def VerifyExternalModule(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LoadExternalModule(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ControlServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -110,6 +132,16 @@ def add_ControlServicer_to_server(servicer, server):
                     servicer.VerifyInlineModule,
                     request_deserializer=transform_dot_v1_dot_control__pb2.VerifyInlineModuleRequest.FromString,
                     response_serializer=transform_dot_v1_dot_control__pb2.VerifyInlineModuleResponse.SerializeToString,
+            ),
+            'VerifyExternalModule': grpc.unary_unary_rpc_method_handler(
+                    servicer.VerifyExternalModule,
+                    request_deserializer=transform_dot_v1_dot_control__pb2.VerifyExternalModuleRequest.FromString,
+                    response_serializer=transform_dot_v1_dot_control__pb2.VerifyExternalModuleResponse.SerializeToString,
+            ),
+            'LoadExternalModule': grpc.unary_unary_rpc_method_handler(
+                    servicer.LoadExternalModule,
+                    request_deserializer=transform_dot_v1_dot_control__pb2.LoadExternalModuleRequest.FromString,
+                    response_serializer=transform_dot_v1_dot_control__pb2.LoadExternalModuleResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -219,6 +251,60 @@ class Control(object):
             '/transform.v1.control.Control/VerifyInlineModule',
             transform_dot_v1_dot_control__pb2.VerifyInlineModuleRequest.SerializeToString,
             transform_dot_v1_dot_control__pb2.VerifyInlineModuleResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def VerifyExternalModule(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/transform.v1.control.Control/VerifyExternalModule',
+            transform_dot_v1_dot_control__pb2.VerifyExternalModuleRequest.SerializeToString,
+            transform_dot_v1_dot_control__pb2.VerifyExternalModuleResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LoadExternalModule(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/transform.v1.control.Control/LoadExternalModule',
+            transform_dot_v1_dot_control__pb2.LoadExternalModuleRequest.SerializeToString,
+            transform_dot_v1_dot_control__pb2.LoadExternalModuleResponse.FromString,
             options,
             channel_credentials,
             insecure,

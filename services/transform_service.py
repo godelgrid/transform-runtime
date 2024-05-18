@@ -1,7 +1,7 @@
 import json
 
+from objects.transformation_executable import TransformationExecutable
 from protocol.transform.v1 import transform_pb2, transform_pb2_grpc
-from services.transformer_factory import TRANSFORM_FACTORY
 
 
 class TransformService(transform_pb2_grpc.Transform):
@@ -18,13 +18,15 @@ class TransformService(transform_pb2_grpc.Transform):
                       timeout=None,
                       metadata=None):
         response = transform_pb2.TransformResponse()
-        transformer_id = request.transformer_id
-        if not transformer_id:
+        transformation_id = request.transformationId
+        if not transformation_id:
             response.data.extend(request.data)
             return response
-        transformer = TRANSFORM_FACTORY.get_transformer(transformer_id)
-        if not transformer:
-            response.transformer_missing = True
+        from services.service_factory import SERVICE_FACTORY
+        transformation: TransformationExecutable = SERVICE_FACTORY.get_transformation_factory().get_transformation(
+            transformation_id)
+        if not transformation:
+            response.transformationMissing = True
             response.data.extend(request.data)
             return response
         data_list = request.data
@@ -37,17 +39,17 @@ class TransformService(transform_pb2_grpc.Transform):
             try:
                 parsed_data = json.loads(data)
             except Exception as e:
-                print(str(e))
+                print(repr(e))
                 transformed_data.append(data)
                 continue
-            context = {'data': parsed_data}
-            exec(transformer, context)
+
             try:
+                transformation.process(parsed_data)
                 json_data = json.dumps(parsed_data)
                 transformed_data.append(json_data)
                 del parsed_data
             except Exception as e:
-                print(str(e))
+                print(repr(e))
                 transformed_data.append(data)
                 continue
 

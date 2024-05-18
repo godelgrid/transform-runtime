@@ -8,9 +8,7 @@ import grpc
 import watchtower
 
 from protocol.transform.v1 import control_pb2_grpc, transform_pb2_grpc
-from services.control_service import ControlService
-from services.process_monitor_service import PROCESS_MONITOR_SERVICE
-from services.transform_service import TransformService
+from services.service_factory import SERVICE_FACTORY, ServiceFactory
 from shutdown_hook import ShutdownHook
 
 logger = logging.getLogger(__name__)
@@ -18,7 +16,8 @@ logger = logging.getLogger(__name__)
 
 class Server:
 
-    def __init__(self, socket_path: str):
+    def __init__(self, service_factory: ServiceFactory, socket_path: str):
+        self._service_factory = service_factory
         self._socket_path = socket_path
         self._server = None
 
@@ -27,8 +26,8 @@ class Server:
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 
         # Add services to server
-        control_pb2_grpc.add_ControlServicer_to_server(ControlService(), server)
-        transform_pb2_grpc.add_TransformServicer_to_server(TransformService(), server)
+        control_pb2_grpc.add_ControlServicer_to_server(self._service_factory.get_control_service(), server)
+        transform_pb2_grpc.add_TransformServicer_to_server(self._service_factory.get_transform_service(), server)
 
         # Remove the socket file if it already exists
         if os.path.exists(socket_path):
@@ -66,15 +65,16 @@ if __name__ == "__main__":
     handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     root_logger.addHandler(handler)
     root_logger.setLevel(logging.INFO)
-    server = Server(socket_path)
+    SERVICE_FACTORY.load_services()
+    server = Server(SERVICE_FACTORY, socket_path)
 
 
     def shutdown_callback():
         root_logger.info("*** Shutting down transform runtime ***")
         server.shutdown()
-        PROCESS_MONITOR_SERVICE.shutdown()
+        SERVICE_FACTORY.get_process_monitor_service().shutdown()
         handler.flush()
-        PROCESS_MONITOR_SERVICE.await_shutdown(timeout=10)
+        SERVICE_FACTORY.get_process_monitor_service().await_shutdown(timeout=10)
         root_logger.info("*** Transform runtime shutdown ***")
         sys.exit(0)
 
@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
-    PROCESS_MONITOR_SERVICE.start(shutdown_hook=shutdown_hook)
+    SERVICE_FACTORY.get_process_monitor_service().start(shutdown_hook=shutdown_hook)
     server.start()
     # Keep the server running until terminated
     try:
