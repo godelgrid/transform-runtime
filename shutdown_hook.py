@@ -7,7 +7,7 @@ class ShutdownHook:
         self._shutdown_callback = shutdown_callback
         self._condition = threading.Condition()
         self._terminated = False
-        self._shutdown_thread = threading.Thread(target=self.await_termination, name='shutdown-thread', daemon=True)
+        self._shutdown_thread = threading.Thread(target=self.await_termination, name='shutdown-thread', daemon=False)
 
     def start(self):
         self._shutdown_thread.start()
