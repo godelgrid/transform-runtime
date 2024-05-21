@@ -107,7 +107,7 @@ class ControlService(control_pb2_grpc.Control):
                              timeout=None,
                              metadata=None):
         repo_data = RepositoryData(transformation_id=request.transformationId,
-                                   repo_type=str(request.repoType),
+                                   repo_type=control_pb2.ExternalRepoType.Name(request.repoType),
                                    repo_path=request.repoPath,
                                    repo_ref=request.repoRef,
                                    access_token=request.accessToken,
@@ -135,7 +135,7 @@ class ControlService(control_pb2_grpc.Control):
                            metadata=None):
         transformation_id = request.tranformationId
         repo_data = RepositoryData(transformation_id=transformation_id,
-                                   repo_type=str(request.repoType),
+                                   repo_type=control_pb2.ExternalRepoType.Name(request.repoType),
                                    repo_path=request.repoPath,
                                    repo_ref=request.repoRef,
                                    access_token=request.accessToken,

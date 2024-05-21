@@ -1,5 +1,6 @@
 import os
 import threading
+import traceback
 from types import CodeType
 from typing import List, Optional, Tuple
 
@@ -48,7 +49,8 @@ class TransformationFactory:
             try:
                 repo_service = repo_service_factory.get_service(repo_data.get_repo_type())
             except Exception as e:
-                return False, repr(e)
+                message = traceback.format_exc()
+                return False, message
 
             repo_path = repo_service.fetch_repository(repo_data)
             external_module_service = SERVICE_FACTORY.get_external_module_service()
@@ -87,7 +89,8 @@ class TransformationFactory:
             try:
                 repo_service = repo_service_factory.get_service(repo_data.get_repo_type())
             except Exception as e:
-                return False, repr(e)
+                message = traceback.format_exc()
+                return False, message
 
             repo_path = repo_service.fetch_repository(repo_data)
             external_module_service = SERVICE_FACTORY.get_external_module_service()

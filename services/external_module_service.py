@@ -2,6 +2,7 @@ import importlib.util
 import os.path
 import subprocess
 import sys
+import traceback
 from types import ModuleType
 from typing import Callable, Optional, Tuple
 
@@ -18,7 +19,7 @@ class ExternalModuleService:
             subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", requirements_path])
             return True, None
         except Exception as e:
-            message = repr(e)
+            message = traceback.format_exc()
             return False, message
 
     def import_module(self, relative_path: str, module_path: str) -> Tuple[bool, Optional[str], Optional[ModuleType]]:
@@ -31,7 +32,7 @@ class ExternalModuleService:
             spec.loader.exec_module(transformation_module)
             return True, None, transformation_module
         except Exception as e:
-            message = repr(e)
+            message = traceback.format_exc()
             return False, message, None
 
     def load_transformation(self, transformation_module: ModuleType, name: str) -> \
@@ -42,5 +43,5 @@ class ExternalModuleService:
                 return False, f'Transformation with name {name} not found in specified module', None
             return True, None, transformation
         except Exception as e:
-            message = repr(e)
+            message = traceback.format_exc()
             return False, message, None
