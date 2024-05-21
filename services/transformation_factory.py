@@ -32,7 +32,7 @@ class TransformationFactory:
             transformation_test = TransformationTest('inline-test', inline_transformation)
             passed, errors = transformation_test.run_sanity_tests()
             if not passed:
-                return False, 'Transformation sanity tests failed with following errors: \n' + "\n".join(errors)
+                return False, 'Transformation sanity tests failed with following errors: \n\n' + "\n\n".join(errors)
         except Exception as e:
             return False, str(e)
 
@@ -86,7 +86,7 @@ class TransformationFactory:
             transformation_test = TransformationTest(repo_data.get_transformation_name(), loaded_transformation)
             passed, errors = transformation_test.run_sanity_tests()
             if not passed:
-                return False, 'Transformation sanity tests failed with following errors: \n' + "\n".join(errors)
+                return False, 'Transformation sanity tests failed with following errors: \n\n' + "\n\n".join(errors)
 
             try:
                 repo_service.clean_up_repository(repo_path)
