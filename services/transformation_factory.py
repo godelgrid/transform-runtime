@@ -2,7 +2,10 @@ import os
 import threading
 import traceback
 from types import CodeType
-from typing import List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
+
+from gdtransform.test import TransformationTest
+from gdtransform.transform import transformation
 
 from objects.repo_data import RepositoryData
 from objects.transformation_executable import EXECUTABLE_TYPE_CALLABLE, EXECUTABLE_TYPE_INLINE, TransformationExecutable
@@ -20,7 +23,16 @@ class TransformationFactory:
         script_object: CodeType
         try:
             script_object = compile_script(script)
-            del script_object
+
+            @transformation(name='inline-test')
+            def inline_transformation(data: Dict[str, Any]):
+                context = {'data': data}
+                exec(script_object, context)
+
+            transformation_test = TransformationTest('inline-test', inline_transformation)
+            passed, errors = transformation_test.run_sanity_tests()
+            if not passed:
+                return False, 'Transformation sanity tests failed with following errors: \n' + "\n".join(errors)
         except Exception as e:
             return False, str(e)
 
@@ -29,9 +41,7 @@ class TransformationFactory:
     def load_inline_module(self, transformation_id: str, script: str) -> [bool, str]:
         with self._factory_lock:
             if transformation_id in self._transformation_map:
-                transformation = self._transformation_map.pop(transformation_id)
-                del transformation
-
+                self._transformation_map.pop(transformation_id)
             script_object: CodeType
             try:
                 script_object = compile_script(script)
@@ -48,7 +58,7 @@ class TransformationFactory:
             repo_service_factory = SERVICE_FACTORY.get_external_repo_service_factory()
             try:
                 repo_service = repo_service_factory.get_service(repo_data.get_repo_type())
-            except Exception as e:
+            except Exception:
                 message = traceback.format_exc()
                 return False, message
 
@@ -68,9 +78,15 @@ class TransformationFactory:
             if not success:
                 return False, f'Error occurred while importing module: {error}'
 
-            success, error, _ = external_module_service.load_transformation(module, repo_data.get_transformation_name())
+            success, error, loaded_transformation = \
+                external_module_service.load_transformation(module, repo_data.get_transformation_name())
             if not success:
                 return False, f'Error occurred while loading transformation: {error}'
+
+            transformation_test = TransformationTest(repo_data.get_transformation_name(), loaded_transformation)
+            passed, errors = transformation_test.run_sanity_tests()
+            if not passed:
+                return False, 'Transformation sanity tests failed with following errors: \n' + "\n".join(errors)
 
             try:
                 repo_service.clean_up_repository(repo_path)
@@ -81,14 +97,13 @@ class TransformationFactory:
     def load_external_module(self, transformation_id: str, repo_data: RepositoryData) -> [bool, str]:
         with self._factory_lock:
             if transformation_id in self._transformation_map:
-                transformation = self._transformation_map.pop(transformation_id)
-                del transformation
+                self._transformation_map.pop(transformation_id)
 
             from services.service_factory import SERVICE_FACTORY
             repo_service_factory = SERVICE_FACTORY.get_external_repo_service_factory()
             try:
                 repo_service = repo_service_factory.get_service(repo_data.get_repo_type())
-            except Exception as e:
+            except Exception:
                 message = traceback.format_exc()
                 return False, message
 
@@ -104,16 +119,16 @@ class TransformationFactory:
 
             module_path = os.path.join(repo_path, repo_data.get_module_path())
             module_path = os.path.normpath(module_path)
-            success, error, module = external_module_service.import_module(module_path)
+            success, error, module = external_module_service.import_module(repo_data.get_module_path(), module_path)
             if not success:
                 return False, f'Error occurred while importing module: {error}'
 
-            success, error, transformation = \
+            success, error, loaded_transformation = \
                 external_module_service.load_transformation(module, repo_data.get_transformation_name())
             if not success:
                 return False, f'Error occurred while loading transformation: {error}'
 
-            self._transformation_map[transformation_id] = (transformation, EXECUTABLE_TYPE_CALLABLE,)
+            self._transformation_map[transformation_id] = (loaded_transformation, EXECUTABLE_TYPE_CALLABLE,)
             return True, None
 
     def get_transformations(self, transformation_ids: List[str]) -> Tuple[List[TransformationExecutable], List[str]]:
@@ -124,7 +139,8 @@ class TransformationFactory:
                 if transformation_id not in self._transformation_map:
                     missing_ids.append(transformation_id)
                 else:
-                    transformation, exec_type = self._transformation_map.get(transformation_id)
-                    transformations.append(TransformationExecutable(transformation_id, transformation, exec_type))
+                    mapped_transformation, exec_type = self._transformation_map.get(transformation_id)
+                    transformations.append(
+                        TransformationExecutable(transformation_id, mapped_transformation, exec_type))
 
             return transformations, missing_ids
