@@ -10,7 +10,7 @@ jmespath==1.0.1
 pip-autoremove==0.10.0
 protobuf==5.26.1
 python-dateutil==2.9.0.post0
-requests==2.31.0
+requests==2.32.2
 s3transfer==0.10.1
 six==1.16.0
 urllib3==2.2.1

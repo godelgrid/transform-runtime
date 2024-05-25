@@ -133,7 +133,7 @@ class ControlService(control_pb2_grpc.Control):
                            wait_for_ready=None,
                            timeout=None,
                            metadata=None):
-        transformation_id = request.tranformationId
+        transformation_id = request.transformationId
         repo_data = RepositoryData(transformation_id=transformation_id,
                                    repo_type=control_pb2.ExternalRepoType.Name(request.repoType),
                                    repo_path=request.repoPath,
