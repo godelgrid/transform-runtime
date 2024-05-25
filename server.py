@@ -64,6 +64,8 @@ if __name__ == "__main__":
         handler = logging.StreamHandler(sys.stdout)
     handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     root_logger.addHandler(handler)
+    file_handler = logging.FileHandler('/tmp/transform-runtime.log')
+    root_logger.addHandler(file_handler)
     root_logger.setLevel(logging.INFO)
     SERVICE_FACTORY.load_services()
     server = Server(SERVICE_FACTORY, socket_path)
