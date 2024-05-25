@@ -56,6 +56,7 @@ class TransformService(transform_pb2_grpc.Transform):
                     break
             try:
                 json_data = json.dumps(parsed_data)
+                logger.info('data = ' + json_data)
                 transformed_data.append(json_data)
                 del parsed_data
             except Exception:
