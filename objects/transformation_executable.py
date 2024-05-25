@@ -1,5 +1,7 @@
 from types import CodeType
-from typing import Any, Callable, Dict, Union
+from typing import Any, Callable, Dict, List, Union
+
+from gdtransform.introspect import is_batch_transformation as check_batch_transformation
 
 EXECUTABLE_TYPE_INLINE = 'inline'
 EXECUTABLE_TYPE_CALLABLE = 'callable'
@@ -15,9 +17,12 @@ class TransformationExecutable:
     def get_transformation_id(self):
         return self._transformation_id
 
-    def process(self, data: Dict[str, Any]):
+    def process(self, data: Union[Dict[str, Any], List[Dict[str, Any]]]):
         if self._type == EXECUTABLE_TYPE_INLINE:
             context = {'data': data}
             exec(self._transformation, context)
         else:  # callable
             self._transformation(data)
+
+    def is_batch_transformation(self):
+        return self._type == EXECUTABLE_TYPE_CALLABLE and check_batch_transformation(self._transformation)
