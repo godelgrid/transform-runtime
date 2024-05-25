@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 
 from protocol.transform.v1 import transform_pb2, transform_pb2_grpc
 
@@ -37,7 +38,10 @@ class TransformService(transform_pb2_grpc.Transform):
             return response
 
         transformed_data = []
+        data_count = 0
+        batch_process_time = 0.0
         for data in data_list:
+            start_time = time.time()
             try:
                 parsed_data = json.loads(data)
             except Exception:
@@ -56,13 +60,18 @@ class TransformService(transform_pb2_grpc.Transform):
                     break
             try:
                 json_data = json.dumps(parsed_data)
-                logger.info('data = ' + json_data)
                 transformed_data.append(json_data)
                 del parsed_data
             except Exception:
                 logger.exception("error occurred while converting data to json")
                 transformed_data.append(data)
-                continue
+
+            end_time = time.time()
+            total_time = end_time - start_time
+            batch_process_time += total_time
+            data_count += 1
+            if data_count % 100 == 0:
+                logger.info("Average processing time = " + str(batch_process_time / data_count))
 
         response.data.extend(transformed_data)
         return response
