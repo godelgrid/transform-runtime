@@ -1,4 +1,5 @@
 import importlib.util
+import logging
 import os.path
 import subprocess
 import sys
@@ -8,6 +9,8 @@ from typing import Callable, Optional, Tuple
 
 from gdtransform import introspect
 
+logger = logging.getLogger(__name__)
+
 
 class ExternalModuleService:
 
@@ -16,7 +19,12 @@ class ExternalModuleService:
 
     def install_requirements(self, requirements_path: str) -> Tuple[bool, Optional[str]]:
         try:
-            subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", requirements_path])
+            command = [sys.executable, "-m", "pip", "install", "-r", requirements_path]
+            process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+            if process.returncode != 0:
+                logger.error(f"error occurred while installing requirements: \n\n{process.stdout} \n\n{process.stderr}")
+                raise subprocess.CalledProcessError(process.returncode, process.args,
+                                                    output=process.stdout, stderr=process.stderr)
             return True, None
         except Exception as e:
             message = traceback.format_exc()
