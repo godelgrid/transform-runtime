@@ -107,7 +107,11 @@ class TransformationFactory:
                 message = traceback.format_exc()
                 return False, message
 
-            repo_path = repo_service.fetch_repository(repo_data)
+            try:
+                repo_path = repo_service.fetch_repository(repo_data)
+            except Exception:
+                message = traceback.format_exc()
+                return False, message
             external_module_service = SERVICE_FACTORY.get_external_module_service()
 
             if repo_data.get_requirements_path():

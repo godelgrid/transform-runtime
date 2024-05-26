@@ -56,16 +56,19 @@ if __name__ == "__main__":
     socket_path = server_args[1]
     use_cloudwatch = "true" == server_args[2].lower()
     root_logger = logging.getLogger()
+    handlers = []
     if use_cloudwatch:
-        handler = watchtower.CloudWatchLogHandler(log_group_name='grid_transform_runtime',
-                                                  log_stream_name='grid_transform_runtime',
-                                                  log_group_retention_days=7)
+        handlers.append(watchtower.CloudWatchLogHandler(log_group_name='grid_transform_runtime',
+                                                        log_stream_name='grid_transform_runtime',
+                                                        log_group_retention_days=7))
     else:
-        handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-    root_logger.addHandler(handler)
-    file_handler = logging.FileHandler('/tmp/transform-runtime.log')
-    root_logger.addHandler(file_handler)
+        handlers.append(logging.StreamHandler(sys.stdout))
+        handlers.append(logging.FileHandler('/tmp/transform-runtime.log'))
+
+    for handler in handlers:
+        handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+        root_logger.addHandler(handler)
+
     root_logger.setLevel(logging.INFO)
     SERVICE_FACTORY.load_services()
     server = Server(SERVICE_FACTORY, socket_path)

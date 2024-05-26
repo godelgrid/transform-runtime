@@ -39,8 +39,6 @@ class TransformService(transform_pb2_grpc.Transform):
             response.data.extend([])
             return response
 
-        start_time = time.time()
-
         parsed_data_list = TransformService.load_json_data(data_list)
 
         for transformation in transformations:
@@ -50,10 +48,6 @@ class TransformService(transform_pb2_grpc.Transform):
                 TransformService.process_singleton_transformation(transformation, parsed_data_list)
 
         transformed_data = TransformService.build_json_data(parsed_data_list)
-
-        end_time = time.time()
-        total_time = end_time - start_time
-        logger.info("Average processing time = " + str(total_time / len(data_list)))
 
         response.data.extend(transformed_data)
         return response
