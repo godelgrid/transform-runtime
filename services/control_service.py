@@ -113,7 +113,9 @@ class ControlService(control_pb2_grpc.Control):
                                    access_token=request.accessToken,
                                    module_path=request.modulePath,
                                    requirements_path=request.requirementsPath,
-                                   transformation_name=request.transformationName)
+                                   transformation_name=request.transformationName,
+                                   transformation_args=request.transformationArgs,
+                                   transformation_kwargs=request.transformationKwargs)
         response = VerifyExternalModuleResponse()
         from services.service_factory import SERVICE_FACTORY
         success, error = SERVICE_FACTORY.get_transformation_factory().verify_external_module(repo_data)
@@ -141,7 +143,9 @@ class ControlService(control_pb2_grpc.Control):
                                    access_token=request.accessToken,
                                    module_path=request.modulePath,
                                    requirements_path=request.requirementsPath,
-                                   transformation_name=request.transformationName)
+                                   transformation_name=request.transformationName,
+                                   transformation_args=request.transformationArgs,
+                                   transformation_kwargs=request.transformationKwargs)
         response = LoadExternalModuleResponse()
         from services.service_factory import SERVICE_FACTORY
         success, error = SERVICE_FACTORY.get_transformation_factory().load_external_module(transformation_id, repo_data)

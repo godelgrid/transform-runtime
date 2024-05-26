@@ -74,16 +74,20 @@ class TransformationFactory:
 
             module_path = os.path.join(repo_path, repo_data.get_module_path())
             module_path = os.path.normpath(module_path)
-            success, error, module = external_module_service.import_module(repo_data.get_module_path(), module_path)
+            success, error, module = external_module_service.import_module(repo_path, repo_data.get_module_path(),
+                                                                           module_path)
             if not success:
                 return False, f'Error occurred while importing module: {error}'
 
-            success, error, loaded_transformation = \
-                external_module_service.load_transformation(module, repo_data.get_transformation_name())
+            success, error, loaded_transformation, transformation_name = \
+                external_module_service.load_transformation(module,
+                                                            repo_data.get_transformation_name(),
+                                                            repo_data.get_transformation_args(),
+                                                            repo_data.get_transformation_kwargs())
             if not success:
                 return False, f'Error occurred while loading transformation: {error}'
 
-            transformation_test = TransformationTest(repo_data.get_transformation_name(), loaded_transformation)
+            transformation_test = TransformationTest(transformation_name, loaded_transformation)
             passed, errors = transformation_test.run_sanity_tests()
             if not passed:
                 return False, 'Transformation sanity tests failed with following errors: \n\n' + "\n\n".join(errors)
@@ -123,14 +127,23 @@ class TransformationFactory:
 
             module_path = os.path.join(repo_path, repo_data.get_module_path())
             module_path = os.path.normpath(module_path)
-            success, error, module = external_module_service.import_module(repo_data.get_module_path(), module_path)
+            success, error, module = external_module_service.import_module(repo_path, repo_data.get_module_path(),
+                                                                           module_path)
             if not success:
                 return False, f'Error occurred while importing module: {error}'
 
-            success, error, loaded_transformation = \
-                external_module_service.load_transformation(module, repo_data.get_transformation_name())
+            success, error, loaded_transformation, transformation_name = \
+                external_module_service.load_transformation(module,
+                                                            repo_data.get_transformation_name(),
+                                                            repo_data.get_transformation_args(),
+                                                            repo_data.get_transformation_kwargs())
             if not success:
                 return False, f'Error occurred while loading transformation: {error}'
+
+            transformation_test = TransformationTest(transformation_name, loaded_transformation)
+            passed, errors = transformation_test.run_sanity_tests()
+            if not passed:
+                return False, 'Transformation sanity tests failed with following errors: \n\n' + "\n\n".join(errors)
 
             self._transformation_map[transformation_id] = (loaded_transformation, EXECUTABLE_TYPE_CALLABLE,)
             return True, None

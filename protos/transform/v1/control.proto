@@ -51,6 +51,8 @@ message VerifyExternalModuleRequest {
   string modulePath = 6;
   string requirementsPath = 7;
   string transformationName = 8;
+  string transformationArgs = 9;
+  string transformationKwargs = 10;
 }
 
 message VerifyExternalModuleResponse {
@@ -67,6 +69,8 @@ message LoadExternalModuleRequest {
   string modulePath = 6;
   string requirementsPath = 7;
   string transformationName = 8;
+  string transformationArgs = 9;
+  string transformationKwargs = 10;
 }
 
 message LoadExternalModuleResponse {

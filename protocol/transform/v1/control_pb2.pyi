@@ -67,7 +67,7 @@ class VerifyInlineModuleResponse(_message.Message):
     def __init__(self, success: bool = ..., error: _Optional[str] = ...) -> None: ...
 
 class VerifyExternalModuleRequest(_message.Message):
-    __slots__ = ("transformationId", "repoType", "repoPath", "repoRef", "accessToken", "modulePath", "requirementsPath", "transformationName")
+    __slots__ = ("transformationId", "repoType", "repoPath", "repoRef", "accessToken", "modulePath", "requirementsPath", "transformationName", "transformationArgs", "transformationKwargs")
     TRANSFORMATIONID_FIELD_NUMBER: _ClassVar[int]
     REPOTYPE_FIELD_NUMBER: _ClassVar[int]
     REPOPATH_FIELD_NUMBER: _ClassVar[int]
@@ -76,6 +76,8 @@ class VerifyExternalModuleRequest(_message.Message):
     MODULEPATH_FIELD_NUMBER: _ClassVar[int]
     REQUIREMENTSPATH_FIELD_NUMBER: _ClassVar[int]
     TRANSFORMATIONNAME_FIELD_NUMBER: _ClassVar[int]
+    TRANSFORMATIONARGS_FIELD_NUMBER: _ClassVar[int]
+    TRANSFORMATIONKWARGS_FIELD_NUMBER: _ClassVar[int]
     transformationId: str
     repoType: ExternalRepoType
     repoPath: str
@@ -84,7 +86,9 @@ class VerifyExternalModuleRequest(_message.Message):
     modulePath: str
     requirementsPath: str
     transformationName: str
-    def __init__(self, transformationId: _Optional[str] = ..., repoType: _Optional[_Union[ExternalRepoType, str]] = ..., repoPath: _Optional[str] = ..., repoRef: _Optional[str] = ..., accessToken: _Optional[str] = ..., modulePath: _Optional[str] = ..., requirementsPath: _Optional[str] = ..., transformationName: _Optional[str] = ...) -> None: ...
+    transformationArgs: str
+    transformationKwargs: str
+    def __init__(self, transformationId: _Optional[str] = ..., repoType: _Optional[_Union[ExternalRepoType, str]] = ..., repoPath: _Optional[str] = ..., repoRef: _Optional[str] = ..., accessToken: _Optional[str] = ..., modulePath: _Optional[str] = ..., requirementsPath: _Optional[str] = ..., transformationName: _Optional[str] = ..., transformationArgs: _Optional[str] = ..., transformationKwargs: _Optional[str] = ...) -> None: ...
 
 class VerifyExternalModuleResponse(_message.Message):
     __slots__ = ("success", "error")
@@ -95,7 +99,7 @@ class VerifyExternalModuleResponse(_message.Message):
     def __init__(self, success: bool = ..., error: _Optional[str] = ...) -> None: ...
 
 class LoadExternalModuleRequest(_message.Message):
-    __slots__ = ("transformationId", "repoType", "repoPath", "repoRef", "accessToken", "modulePath", "requirementsPath", "transformationName")
+    __slots__ = ("transformationId", "repoType", "repoPath", "repoRef", "accessToken", "modulePath", "requirementsPath", "transformationName", "transformationArgs", "transformationKwargs")
     TRANSFORMATIONID_FIELD_NUMBER: _ClassVar[int]
     REPOTYPE_FIELD_NUMBER: _ClassVar[int]
     REPOPATH_FIELD_NUMBER: _ClassVar[int]
@@ -104,6 +108,8 @@ class LoadExternalModuleRequest(_message.Message):
     MODULEPATH_FIELD_NUMBER: _ClassVar[int]
     REQUIREMENTSPATH_FIELD_NUMBER: _ClassVar[int]
     TRANSFORMATIONNAME_FIELD_NUMBER: _ClassVar[int]
+    TRANSFORMATIONARGS_FIELD_NUMBER: _ClassVar[int]
+    TRANSFORMATIONKWARGS_FIELD_NUMBER: _ClassVar[int]
     transformationId: str
     repoType: ExternalRepoType
     repoPath: str
@@ -112,7 +118,9 @@ class LoadExternalModuleRequest(_message.Message):
     modulePath: str
     requirementsPath: str
     transformationName: str
-    def __init__(self, transformationId: _Optional[str] = ..., repoType: _Optional[_Union[ExternalRepoType, str]] = ..., repoPath: _Optional[str] = ..., repoRef: _Optional[str] = ..., accessToken: _Optional[str] = ..., modulePath: _Optional[str] = ..., requirementsPath: _Optional[str] = ..., transformationName: _Optional[str] = ...) -> None: ...
+    transformationArgs: str
+    transformationKwargs: str
+    def __init__(self, transformationId: _Optional[str] = ..., repoType: _Optional[_Union[ExternalRepoType, str]] = ..., repoPath: _Optional[str] = ..., repoRef: _Optional[str] = ..., accessToken: _Optional[str] = ..., modulePath: _Optional[str] = ..., requirementsPath: _Optional[str] = ..., transformationName: _Optional[str] = ..., transformationArgs: _Optional[str] = ..., transformationKwargs: _Optional[str] = ...) -> None: ...
 
 class LoadExternalModuleResponse(_message.Message):
     __slots__ = ("success", "error")

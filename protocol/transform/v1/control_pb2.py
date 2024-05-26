@@ -14,15 +14,15 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1atransform/v1/control.proto\x12\x14transform.v1.control\"\x16\n\x14ServerDetailsRequest\"*\n\x15ServerDetailsResponse\x12\x11\n\tserverPid\x18\x01 \x01(\t\"\x12\n\x10HeartbeatRequest\"$\n\x11HeartbeatResponse\x12\x0f\n\x07healthy\x18\x01 \x01(\x08\"C\n\x17LoadInlineModuleRequest\x12\x18\n\x10transformationId\x18\x01 \x01(\t\x12\x0e\n\x06script\x18\x02 \x01(\t\":\n\x18LoadInlineModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"+\n\x19VerifyInlineModuleRequest\x12\x0e\n\x06script\x18\x01 \x01(\t\"<\n\x1aVerifyInlineModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"\xf3\x01\n\x1bVerifyExternalModuleRequest\x12\x18\n\x10transformationId\x18\x01 \x01(\t\x12\x38\n\x08repoType\x18\x02 \x01(\x0e\x32&.transform.v1.control.ExternalRepoType\x12\x10\n\x08repoPath\x18\x03 \x01(\t\x12\x0f\n\x07repoRef\x18\x04 \x01(\t\x12\x13\n\x0b\x61\x63\x63\x65ssToken\x18\x05 \x01(\t\x12\x12\n\nmodulePath\x18\x06 \x01(\t\x12\x18\n\x10requirementsPath\x18\x07 \x01(\t\x12\x1a\n\x12transformationName\x18\x08 \x01(\t\">\n\x1cVerifyExternalModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"\xf1\x01\n\x19LoadExternalModuleRequest\x12\x18\n\x10transformationId\x18\x01 \x01(\t\x12\x38\n\x08repoType\x18\x02 \x01(\x0e\x32&.transform.v1.control.ExternalRepoType\x12\x10\n\x08repoPath\x18\x03 \x01(\t\x12\x0f\n\x07repoRef\x18\x04 \x01(\t\x12\x13\n\x0b\x61\x63\x63\x65ssToken\x18\x05 \x01(\t\x12\x12\n\nmodulePath\x18\x06 \x01(\t\x12\x18\n\x10requirementsPath\x18\x07 \x01(\t\x12\x1a\n\x12transformationName\x18\x08 \x01(\t\"<\n\x1aLoadExternalModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t*L\n\x10\x45xternalRepoType\x12\x10\n\x0cUNKNOWN_REPO\x10\x00\x12\n\n\x06GITHUB\x10\x01\x12\n\n\x06GITLAB\x10\x02\x12\x0e\n\nBIT_BUCKET\x10\x03\x32\xbb\x05\n\x07\x43ontrol\x12h\n\rServerDetails\x12*.transform.v1.control.ServerDetailsRequest\x1a+.transform.v1.control.ServerDetailsResponse\x12\x62\n\x0bHealthCheck\x12&.transform.v1.control.HeartbeatRequest\x1a\'.transform.v1.control.HeartbeatResponse(\x01\x30\x01\x12q\n\x10LoadInlineModule\x12-.transform.v1.control.LoadInlineModuleRequest\x1a..transform.v1.control.LoadInlineModuleResponse\x12w\n\x12VerifyInlineModule\x12/.transform.v1.control.VerifyInlineModuleRequest\x1a\x30.transform.v1.control.VerifyInlineModuleResponse\x12}\n\x14VerifyExternalModule\x12\x31.transform.v1.control.VerifyExternalModuleRequest\x1a\x32.transform.v1.control.VerifyExternalModuleResponse\x12w\n\x12LoadExternalModule\x12/.transform.v1.control.LoadExternalModuleRequest\x1a\x30.transform.v1.control.LoadExternalModuleResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1atransform/v1/control.proto\x12\x14transform.v1.control\"\x16\n\x14ServerDetailsRequest\"*\n\x15ServerDetailsResponse\x12\x11\n\tserverPid\x18\x01 \x01(\t\"\x12\n\x10HeartbeatRequest\"$\n\x11HeartbeatResponse\x12\x0f\n\x07healthy\x18\x01 \x01(\x08\"C\n\x17LoadInlineModuleRequest\x12\x18\n\x10transformationId\x18\x01 \x01(\t\x12\x0e\n\x06script\x18\x02 \x01(\t\":\n\x18LoadInlineModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"+\n\x19VerifyInlineModuleRequest\x12\x0e\n\x06script\x18\x01 \x01(\t\"<\n\x1aVerifyInlineModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"\xad\x02\n\x1bVerifyExternalModuleRequest\x12\x18\n\x10transformationId\x18\x01 \x01(\t\x12\x38\n\x08repoType\x18\x02 \x01(\x0e\x32&.transform.v1.control.ExternalRepoType\x12\x10\n\x08repoPath\x18\x03 \x01(\t\x12\x0f\n\x07repoRef\x18\x04 \x01(\t\x12\x13\n\x0b\x61\x63\x63\x65ssToken\x18\x05 \x01(\t\x12\x12\n\nmodulePath\x18\x06 \x01(\t\x12\x18\n\x10requirementsPath\x18\x07 \x01(\t\x12\x1a\n\x12transformationName\x18\x08 \x01(\t\x12\x1a\n\x12transformationArgs\x18\t \x01(\t\x12\x1c\n\x14transformationKwargs\x18\n \x01(\t\">\n\x1cVerifyExternalModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"\xab\x02\n\x19LoadExternalModuleRequest\x12\x18\n\x10transformationId\x18\x01 \x01(\t\x12\x38\n\x08repoType\x18\x02 \x01(\x0e\x32&.transform.v1.control.ExternalRepoType\x12\x10\n\x08repoPath\x18\x03 \x01(\t\x12\x0f\n\x07repoRef\x18\x04 \x01(\t\x12\x13\n\x0b\x61\x63\x63\x65ssToken\x18\x05 \x01(\t\x12\x12\n\nmodulePath\x18\x06 \x01(\t\x12\x18\n\x10requirementsPath\x18\x07 \x01(\t\x12\x1a\n\x12transformationName\x18\x08 \x01(\t\x12\x1a\n\x12transformationArgs\x18\t \x01(\t\x12\x1c\n\x14transformationKwargs\x18\n \x01(\t\"<\n\x1aLoadExternalModuleResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t*L\n\x10\x45xternalRepoType\x12\x10\n\x0cUNKNOWN_REPO\x10\x00\x12\n\n\x06GITHUB\x10\x01\x12\n\n\x06GITLAB\x10\x02\x12\x0e\n\nBIT_BUCKET\x10\x03\x32\xbb\x05\n\x07\x43ontrol\x12h\n\rServerDetails\x12*.transform.v1.control.ServerDetailsRequest\x1a+.transform.v1.control.ServerDetailsResponse\x12\x62\n\x0bHealthCheck\x12&.transform.v1.control.HeartbeatRequest\x1a\'.transform.v1.control.HeartbeatResponse(\x01\x30\x01\x12q\n\x10LoadInlineModule\x12-.transform.v1.control.LoadInlineModuleRequest\x1a..transform.v1.control.LoadInlineModuleResponse\x12w\n\x12VerifyInlineModule\x12/.transform.v1.control.VerifyInlineModuleRequest\x1a\x30.transform.v1.control.VerifyInlineModuleResponse\x12}\n\x14VerifyExternalModule\x12\x31.transform.v1.control.VerifyExternalModuleRequest\x1a\x32.transform.v1.control.VerifyExternalModuleResponse\x12w\n\x12LoadExternalModule\x12/.transform.v1.control.LoadExternalModuleRequest\x1a\x30.transform.v1.control.LoadExternalModuleResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'transform.v1.control_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_EXTERNALREPOTYPE']._serialized_start=1030
-  _globals['_EXTERNALREPOTYPE']._serialized_end=1106
+  _globals['_EXTERNALREPOTYPE']._serialized_start=1146
+  _globals['_EXTERNALREPOTYPE']._serialized_end=1222
   _globals['_SERVERDETAILSREQUEST']._serialized_start=52
   _globals['_SERVERDETAILSREQUEST']._serialized_end=74
   _globals['_SERVERDETAILSRESPONSE']._serialized_start=76
@@ -40,13 +40,13 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_VERIFYINLINEMODULERESPONSE']._serialized_start=352
   _globals['_VERIFYINLINEMODULERESPONSE']._serialized_end=412
   _globals['_VERIFYEXTERNALMODULEREQUEST']._serialized_start=415
-  _globals['_VERIFYEXTERNALMODULEREQUEST']._serialized_end=658
-  _globals['_VERIFYEXTERNALMODULERESPONSE']._serialized_start=660
-  _globals['_VERIFYEXTERNALMODULERESPONSE']._serialized_end=722
-  _globals['_LOADEXTERNALMODULEREQUEST']._serialized_start=725
-  _globals['_LOADEXTERNALMODULEREQUEST']._serialized_end=966
-  _globals['_LOADEXTERNALMODULERESPONSE']._serialized_start=968
-  _globals['_LOADEXTERNALMODULERESPONSE']._serialized_end=1028
-  _globals['_CONTROL']._serialized_start=1109
-  _globals['_CONTROL']._serialized_end=1808
+  _globals['_VERIFYEXTERNALMODULEREQUEST']._serialized_end=716
+  _globals['_VERIFYEXTERNALMODULERESPONSE']._serialized_start=718
+  _globals['_VERIFYEXTERNALMODULERESPONSE']._serialized_end=780
+  _globals['_LOADEXTERNALMODULEREQUEST']._serialized_start=783
+  _globals['_LOADEXTERNALMODULEREQUEST']._serialized_end=1082
+  _globals['_LOADEXTERNALMODULERESPONSE']._serialized_start=1084
+  _globals['_LOADEXTERNALMODULERESPONSE']._serialized_end=1144
+  _globals['_CONTROL']._serialized_start=1225
+  _globals['_CONTROL']._serialized_end=1924
 # @@protoc_insertion_point(module_scope)
